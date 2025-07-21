@@ -76,18 +76,7 @@
 - Demo video ή live demo
 - README με setup instructions
 
-## Υποστήριξη
-
-Για ερωτήσεις σχετικά με την εργασία, παρακαλούμε επικοινωνήστε μαζί μας.
 
 ---
 
 ## Καλή επιτυχία!
-
-Αυτή η εργασία είναι μια εξαιρετική ευκαιρία να δείξετε τις τεχνικές σας δεξιότητες, την επιχειρηματική σας σκέψη και την ικανότητά σας να δημιουργείτε practical solutions.
-
-**Let's build something amazing together!**
-
----
-
-*© 2024 AthenaGen AI - All rights reserved* 
