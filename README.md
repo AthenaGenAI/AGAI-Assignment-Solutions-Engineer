@@ -29,7 +29,7 @@
    - Custom User Interface με approve/cancel/edit functionality
    - Integration με Google Sheets ή Excel
    - Error handling και logging
-4. **Testing & Demo** - Επιδείξη λειτουργικότητας
+4. **Testing & Demo** - Επίδειξη λειτουργικότητας
 
 ## Σημαντικό: Human-in-the-Loop
 
