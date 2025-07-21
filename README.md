@@ -1,26 +1,26 @@
 # AGAI Assignment - Solutions Engineer
 
-## 🎯 Περιγραφή Εργασίας
+## Περιγραφή Εργασίας
 
 Καλώς ήρθατε στην εργασία αξιολόγησης για τη θέση του **Solutions Engineer** στην **AthenaGen AI**!
 
 Αυτή η εργασία προσομοιώνει ένα πραγματικό automation project όπου θα αναλάβετε τον ρόλο του consultant για έναν πελάτη που χρειάζεται αυτοματοποίηση της διαχείρισης δεδομένων, μέχρι και την υλοποίηση του έργου.
 
-## 📋 Τι περιλαμβάνει
+## Τι περιλαμβάνει
 
-### 📄 Κύρια Εργασία
+### Κύρια Εργασία
 - **`ΕΡΓΑΣΙΑ_AUTOMATION_PROJECT.md`** - Πλήρης περιγραφή της εργασίας, απαιτήσεων και παραδοτέων
 
-### 📊 Δεδομένα Προς Επεξεργασία
+### Δεδομένα Προς Επεξεργασία
 - **`dummy_data/forms/`** - 5 HTML φόρμες με στοιχεία πελατών
 - **`dummy_data/emails/`** - 10 email αρχεία (.eml format)
 - **`dummy_data/invoices/`** - 10 HTML τιμολόγια (PDF simulation)
 - **`dummy_data/templates/`** - Template για οργάνωση δεδομένων
 
-### 🏆 Αξιολόγηση
+### Αξιολόγηση
 - **`ΑΞΙΟΛΟΓΗΣΗ_RUBRIC.md`** - Λεπτομερή κριτήρια βαθμολογίας
 
-## 🚀 Τι πρέπει να υλοποιήσετε
+## Τι πρέπει να υλοποιήσετε
 
 1. **Ανάλυση Αναγκών Πελάτη** - Κατανόηση του business problem
 2. **Τεχνική Πρόταση** - Σχεδιασμός λύσης αυτοματισμού
@@ -31,16 +31,16 @@
    - Error handling και logging
 4. **Testing & Demo** - Επιδείξη λειτουργικότητας
 
-## ⚠️ Σημαντικό: Human-in-the-Loop
+## Σημαντικό: Human-in-the-Loop
 
 Το σύστημα **ΔΕΝ πρέπει** να είναι πλήρως αυτόματο. Απαιτείται:
-- ✅ Dashboard για real-time monitoring
-- ✅ Approve/Cancel system για κάθε data extraction
-- ✅ Manual edit capabilities
-- ✅ Error detection και warnings
-- ✅ Πλήρης έλεγχος από τον χρήστη
+- Dashboard για real-time monitoring
+- Approve/Cancel system για κάθε data extraction
+- Manual edit capabilities
+- Error detection και warnings
+- Πλήρης έλεγχος από τον χρήστη
 
-## 📁 Δομή Αρχείων
+## Δομή Αρχείων
 
 ```
 .
@@ -55,7 +55,7 @@
     └── templates/                      # CSV template
 ```
 
-## 🎯 Στόχος
+## Στόχος
 
 Δημιουργήστε ένα πλήρες automation solution που:
 - Εξάγει δεδομένα από όλους τους τύπους αρχείων
@@ -64,7 +64,7 @@
 - Είναι αξιόπιστο και maintainable
 - Δίνει στον client πλήρη έλεγχο
 
-## 📤 Παράδοση Εργασίας
+## Παράδοση Εργασίας
 
 **Παραδώστε την εργασία όταν είστε έτοιμοι!**
 
@@ -76,18 +76,18 @@
 - Demo video ή live demo
 - README με setup instructions
 
-## 📞 Υποστήριξη
+## Υποστήριξη
 
 Για ερωτήσεις σχετικά με την εργασία, παρακαλούμε επικοινωνήστε μαζί μας.
 
 ---
 
-## 🌟 Καλή επιτυχία!
+## Καλή επιτυχία!
 
 Αυτή η εργασία είναι μια εξαιρετική ευκαιρία να δείξετε τις τεχνικές σας δεξιότητες, την επιχειρηματική σας σκέψη και την ικανότητά σας να δημιουργείτε practical solutions.
 
-**Let's build something amazing together!** 🚀
+**Let's build something amazing together!**
 
 ---
 
-*© 2024 Athena GenAI - All rights reserved* 
+*© 2024 AthenaGen AI - All rights reserved* 

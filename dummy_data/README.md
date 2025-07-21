@@ -17,7 +17,7 @@ dummy_data/
 
 ### Λεπτομέρειες
 
-#### 📋 Forms (5 αρχεία)
+#### Forms (5 αρχεία)
 - **contact_form_1.html** - Digital Marketing Pro (Νίκος Παπαδόπουλος)
 - **contact_form_2.html** - Δικηγορικό Γραφείο (Μαρία Κώστα)
 - **contact_form_3.html** - Restaurant Chain (Γιάννης Αντωνίου)
@@ -34,7 +34,7 @@ dummy_data/
 - Προτεραιότητα
 - Ημερομηνία Υποβολής
 
-#### 📧 Emails (10 αρχεία)
+#### Emails (10 αρχεία)
 - **email_01.eml** - TechCorp AE (Σπύρος Μιχαήλ) - CRM System
 - **email_02.eml** - Fashion Store (Ελένη Παπαγεωργίου) - E-commerce
 - **email_03.eml** - Τιμολόγιο #TF-2024-001 (Office Supplies)
@@ -50,7 +50,7 @@ dummy_data/
 - Client inquiries (60%)
 - Invoice notifications (40%)
 
-#### 💼 Invoices (10 αρχεία HTML)
+#### Invoices (10 αρχεία HTML)
 - **TF-2024-001** - Office Supplies (€1,054.00)
 - **TF-2024-002** - Software Licenses (€2,976.00)
 - **TF-2024-003** - Hardware Equipment (€5,208.00)
@@ -71,7 +71,7 @@ dummy_data/
 - Συνολικό Ποσό
 - Περιγραφή Προϊόντων/Υπηρεσιών
 
-### 📊 Template
+### Template
 - **data_extraction_template.csv** - Προτεινόμενη δομή για την οργάνωση των εξαχθέντων δεδομένων
 
 ### Σημειώσεις για Υλοποίηση
@@ -93,4 +93,4 @@ dummy_data/
 - Έλεγχος ακρίβειας αριθμητικών τιμών
 - Error handling για μη-έγκυρα αρχεία
 
-**Καλή επιτυχία στην υλοποίηση!** 🚀 
+**Καλή επιτυχία στην υλοποίηση!** 
