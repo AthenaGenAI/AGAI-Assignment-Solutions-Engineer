@@ -1,0 +1,18 @@
+{% extends 'records/base.html' %}
+
+{% block title %}Invoice Details{% endblock %}
+
+{% block content %}
+<h1>Invoice Details</h1>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Invoice ID: {{ invoice.id }}</h5>
+        <p class="card-text"><strong>Date:</strong> {{ invoice.date }}</p>
+        <p class="card-text"><strong>Customer:</strong> {{ invoice.customer }}</p>
+        <p class="card-text"><strong>Amount:</strong> {{ invoice.amount }}</p>
+        <p class="card-text"><strong>Status:</strong> {{ invoice.status }}</p>
+        <p class="card-text"><strong>Description:</strong> {{ invoice.description }}</p>
+    </div>
+</div>
+<a href="{% url 'invoice_list' %}" class="btn btn-secondary mt-3">Back to Invoices</a>
+{% endblock %}

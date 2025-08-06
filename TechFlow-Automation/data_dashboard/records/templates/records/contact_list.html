@@ -1,0 +1,53 @@
+{% extends "records/base.html" %}
+{% block title %}Contacts{% endblock %}
+{% block content %}
+<style>
+    .clickable-link {
+        text-decoration: none;
+        color: inherit;
+    }
+    .clickable-link:hover {
+        text-decoration: underline;
+    }
+</style>
+<h1>Contacts</h1>
+<form method="get" class="mb-3">
+    <select name="status" class="form-select w-auto d-inline">
+        <option value="">All</option>
+        <option value="Pending">Pending</option>
+        <option value="Approved">Approved</option>
+        <option value="Rejected">Rejected</option>
+    </select>
+    <button type="submit" class="btn btn-primary">Filter</button>
+</form>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for contact in contacts %}
+        <tr>
+            <td><a href="{% url 'contact_detail' contact.pk %}" class="clickable-link">{{ contact.name }}</a></td>
+            <td><a href="{% url 'contact_detail' contact.pk %}" class="clickable-link">{{ contact.email }}</a></td>
+            <td>
+                <a href="{% url 'contact_edit' contact.id %}" class="badge
+                    {% if contact.status == 'Pending' %}bg-secondary
+                    {% elif contact.status == 'Approved' %}bg-success
+                    {% elif contact.status == 'Rejected' %}bg-danger
+                    {% else %}bg-secondary{% endif %}">
+                    {{ contact.status }}
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'contact_delete' contact.id %}" class="btn btn-sm btn-danger">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

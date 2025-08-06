@@ -1,0 +1,28 @@
+{% extends "records/base.html" %}
+{% block title %}Invoices{% endblock %}
+{% block content %}
+<h1>Invoices</h1>
+<table class="table table-striped">
+    <tr>
+        <th>Number</th><th>Date</th><th>Status</th><th>Actions</th>
+    </tr>
+    {% for invoice in invoices %}
+    <tr>
+        <td class="text-dark"><a href="{% url 'serve_invoice_html' invoice.invoice_number %}" class="clickable-link" target="_blank">{{ invoice.invoice_number }}</a></td>
+        <td>{{ invoice.date }}</td>
+        <td>
+            <a href="{% url 'invoice_update_status' invoice.id %}" class="badge
+                {% if invoice.status == 'Pending' %}bg-secondary
+                {% elif invoice.status == 'Approved' %}bg-success
+                {% elif invoice.status == 'Rejected' %}bg-danger
+                {% else %}bg-secondary{% endif %}">
+                {{ invoice.status }}
+            </a>
+        </td>
+        <td>
+            <a href="{% url 'invoice_delete' invoice.id %}" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

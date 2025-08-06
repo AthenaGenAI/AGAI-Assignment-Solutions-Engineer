@@ -1,0 +1,33 @@
+{% extends 'records/base.html' %}
+
+{% block title %}Templates{% endblock %}
+
+{% block content %}
+<h1>Templates</h1>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Type</th>
+            <th>Source</th>
+            <th>Date</th>
+            <th>Client Name</th>
+            <th>Amount</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for template in templates %}
+        <tr>
+            <td>{{ template.type }}</td>
+            <td>{{ template.source }}</td>
+            <td>{{ template.date }}</td>
+            <td>{{ template.client_name }}</td>
+            <td>{{ template.amount }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5" class="text-center text-muted">No templates found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

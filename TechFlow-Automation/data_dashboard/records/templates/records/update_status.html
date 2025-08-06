@@ -1,0 +1,18 @@
+{% extends 'records/base.html' %}
+
+{% block title %}Update Status{% endblock %}
+
+{% block content %}
+<h1>Update Status for {{ form.name }}</h1>
+<form method="post">
+    {% csrf_token %}
+    <label for="status">Select New Status:</label>
+    <select id="status" name="status">
+        <option value="Pending" {% if form.status == 'Pending' %}selected{% endif %}>Pending</option>
+        <option value="Approved" {% if form.status == 'Approved' %}selected{% endif %}>Approved</option>
+        <option value="Rejected" {% if form.status == 'Rejected' %}selected{% endif %}>Rejected</option>
+    </select>
+    <button type="submit" class="btn btn-success">Update</button>
+    <a href="{% url 'form_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}

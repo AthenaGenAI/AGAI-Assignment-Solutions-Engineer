@@ -1,0 +1,19 @@
+{% extends 'records/base.html' %}
+
+{% block title %}Contact Details{% endblock %}
+
+{% block content %}
+<h1>Contact Details</h1>
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{ contact.name }}</h5>
+        <p class="card-text"><strong>Email:</strong> {{ contact.email }}</p>
+        <p class="card-text"><strong>Phone:</strong> {{ contact.phone }}</p>
+        <p class="card-text"><strong>Company:</strong> {{ contact.company }}</p>
+        <p class="card-text"><strong>Message:</strong> {{ contact.message }}</p>
+        <p class="card-text"><strong>Status:</strong> {{ contact.status }}</p>
+        <p class="card-text"><strong>Created At:</strong> {{ contact.created_at }}</p>
+    </div>
+</div>
+<a href="{% url 'contact_list' %}" class="btn btn-secondary mt-3">Back to Contacts</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+={% extends "records/base.html" %}
+{% block title %}Delete Invoice{% endblock %}
+{% block content %}
+<h1>Delete Invoice</h1>
+<p>Are you sure you want to delete invoice <strong>{{ invoice.number }}</strong>?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a href="{% url 'invoice_list' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
