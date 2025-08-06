@@ -1,0 +1,229 @@
+{% extends 'records/base.html' %}
+
+{% block title %}Dashboard - TechFlow Automation{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+    <h1 class="h2">Automation Dashboard</h1>
+    <div class="btn-toolbar mb-2 mb-md-0">
+        <button type="button" class="btn btn-sm btn-primary">
+            <i class="fas fa-plus me-1"></i>New Process
+        </button>
+    </div>
+</div>
+
+<!-- Status Cards -->
+<div class="row mb-4">
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-primary h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                            Pending Invoices
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ pending_invoices }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-file-invoice fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-secondary h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-secondary text-uppercase mb-1">
+                            Pending Contacts
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">{{ pending_contacts }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-users fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-xl-3 col-md-6 mb-4">
+        <div class="card border-left-info h-100 py-2">
+            <div class="card-body">
+                <div class="row no-gutters align-items-center">
+                    <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                            Monthly Savings
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">€{{ monthly_savings }}</div>
+                    </div>
+                    <div class="col-auto">
+                        <i class="fas fa-euro-sign fa-2x text-gray-300"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Recent Activity & Quick Actions -->
+<div class="row">
+    <div class="col-lg-8">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold text-primary">Recent Processing Activity</h6>
+                <div class="dropdown no-arrow">
+                    <a class="dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                        <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right shadow">
+                        <a class="dropdown-item" href="#">View All</a>
+                        <a class="dropdown-item" href="#">Export</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-borderless">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Source</th>
+                                <th>Status</th>
+                                <th>Time</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for activity in recent_activities %}
+                            <tr>
+                                <td>
+                                    {% if activity.type == 'Email' %}
+                                        <i class="fas fa-envelope text-primary me-2"></i>Email
+                                    {% elif activity.type == 'Invoice' %}
+                                        <i class="fas fa-file-invoice text-success me-2"></i>Invoice
+                                    {% elif activity.type == 'Contact' %}
+                                        <i class="fas fa-users text-secondary me-2"></i>Contact
+                                    {% endif %}
+                                </td>
+                                <td>{{ activity.source }}</td>
+                                <td>
+                                    {% if activity.status == 'Pending' %}
+                                        <span class="badge status-badge bg-secondary">Pending</span>
+                                    {% elif activity.status == 'Approved' %}
+                                        <span class="badge status-badge bg-success">Approved</span>
+                                    {% elif activity.status == 'Rejected' %}
+                                        <span class="badge status-badge bg-danger">Rejected</span>
+                                    {% elif activity.status %}
+                                        <span class="badge status-badge bg-info">{{ activity.status }}</span>
+                                    {% else %}
+                                        <span class="badge status-badge bg-light text-dark">-</span>
+                                    {% endif %}
+                                </td>
+                                <td>{{ activity.time }}</td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-primary">Review</button>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="5" class="text-center text-muted">No recent activity found.</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Quick Actions</h6>
+            </div>
+            <div class="card-body">
+                <div class="d-grid gap-2">
+                    <button class="btn btn-primary" type="button">
+                        <i class="fas fa-upload me-2"></i>Upload Files
+                    </button>
+                    <button class="btn btn-outline-primary" type="button">
+                        <i class="fas fa-cogs me-2"></i>Configure Rules
+                    </button>
+                    <button class="btn btn-outline-secondary" type="button">
+                        <i class="fas fa-download me-2"></i>Export Data
+                    </button>
+                    <button class="btn btn-outline-info" type="button">
+                        <i class="fas fa-chart-bar me-2"></i>View Reports
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="card shadow">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">System Status</h6>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Email Parser</span>
+                        <span class="text-success"><i class="fas fa-circle"></i> Online</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Form Processor</span>
+                        <span class="text-success"><i class="fas fa-circle"></i> Online</span>
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between">
+                        <span>Invoice Engine</span>
+                        <span class="text-warning"><i class="fas fa-circle"></i> Busy</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+// Auto-refresh dashboard data every 30 seconds
+setInterval(function() {
+    // Refresh specific dashboard metrics
+    fetch(window.location.href)
+        .then(response => response.text())
+        .then(data => {
+            console.log('Dashboard data refreshed');
+            // You can parse the response and update specific elements
+            // For now, we'll just log that it refreshed
+        })
+        .catch(error => {
+            console.error('Error refreshing dashboard:', error);
+        });
+}, 30000); // 30 seconds
+
+// Add click handlers for action buttons
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle Review buttons
+    document.querySelectorAll('.btn-outline-primary').forEach(button => {
+        if (button.textContent.trim() === 'Review') {
+            button.addEventListener('click', function() {
+                // Add your review logic here
+                console.log('Review button clicked');
+            });
+        }
+    });
+});
+</script>
+{% endblock %}

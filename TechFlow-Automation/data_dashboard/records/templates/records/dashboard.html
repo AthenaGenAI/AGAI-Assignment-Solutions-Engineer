@@ -1,0 +1,22 @@
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Service</th>
+      <th>Message</th>
+      <th>Submitted At</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for form in forms %}
+      <tr>
+        <td>{{ form.name }}</td>
+        <td>{{ form.email }}</td>
+        <td>{{ form.service }}</td>
+        <td>{{ form.message }}</td>
+        <td>{{ form.submitted_at }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>

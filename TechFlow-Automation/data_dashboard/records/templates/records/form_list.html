@@ -1,0 +1,198 @@
+{% extends 'records/base.html' %}
+
+{% block title %}Forms{% endblock %}
+
+<style>
+    .table td {
+        word-wrap: break-word;
+    }
+    .table td:nth-child(1) { /* Name column */
+        max-width: 100px;
+        word-wrap: break-word;
+    }
+    .table td:nth-child(2) { /* Email column */
+        max-width: 150px;
+        word-wrap: break-word;
+    }
+    .table td:nth-child(3) { /* Phone column */
+        white-space: nowrap;
+        max-width: 150px; /* Increased from 120px to fit phone in one line */
+    }
+    .table td:nth-child(4) { /* Company column */
+        max-width: 120px;
+        word-wrap: break-word;
+    }
+    .table td:nth-child(5) { /* Service column */
+        max-width: 120px;
+        word-wrap: break-word;
+    }
+    .table td:nth-child(6) { /* Message column */
+        max-width: 55px; /* Reduced from 80px to about 1/3 smaller */
+        word-wrap: break-word;
+    }
+    .table td:nth-child(7) { /* Submitted At column */
+        max-width: 150px;
+        word-wrap: break-word;
+    }
+    .table td:nth-child(8) { /* Priority column */
+        max-width: 80px;
+        word-wrap: break-word;
+    }
+    .table td:nth-child(9) { /* Status column */
+        max-width: 100px;
+        word-wrap: break-word;
+    }
+    .status-bar {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 15px;
+        color: white;
+        font-weight: bold;
+        text-align: center;
+    }
+    .status-approved {
+        background-color: green;
+    }
+    .status-pending {
+        background-color: grey;
+    }
+    .status-rejected {
+        background-color: red;
+    }
+    .badge {
+        text-decoration: none;
+    }
+</style>
+
+<script>
+    function openStatusMenu(event, formId) {
+        const menu = document.getElementById(`status-menu-${formId}`);
+        menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function changeStatus(formId, newStatus) {
+        // Update the status visually
+        const statusBar = document.getElementById(`status-bar-${formId}`);
+        statusBar.className = `status-bar status-${newStatus.toLowerCase()}`;
+        statusBar.textContent = newStatus;
+
+        // Hide the menu
+        const menu = document.getElementById(`status-menu-${formId}`);
+        menu.style.display = 'none';
+
+        // Send the new status to the server via an AJAX request
+        fetch(`/update-status/${formId}/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCSRFToken(), // Ensure CSRF token is included
+            },
+            body: JSON.stringify({ status: newStatus }),
+        })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Failed to update status');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Status updated successfully:', data);
+        })
+        .catch(error => {
+            console.error('Error updating status:', error);
+        });
+    }
+
+    function getCSRFToken() {
+        const cookies = document.cookie.split(';');
+        for (let cookie of cookies) {
+            const [name, value] = cookie.trim().split('=');
+            if (name === 'csrftoken') {
+                return value;
+            }
+        }
+        return '';
+    }
+
+    function validateFormSubmission(formData) {
+        const existingForms = document.querySelectorAll(".table tbody tr");
+        for (const row of existingForms) {
+            const cells = row.querySelectorAll("td");
+            if (
+                cells[0].textContent.trim() === formData.name &&
+                cells[1].textContent.trim() === formData.email &&
+                cells[2].textContent.trim() === formData.phone &&
+                cells[3].textContent.trim() === formData.company &&
+                cells[4].textContent.trim() === formData.service
+            ) {
+                alert("Duplicate entry detected. Please check the form details.");
+                return false;
+            }
+        }
+        return true;
+    }
+
+    document.querySelector("#form-submit-button").addEventListener("click", function (event) {
+        const formData = {
+            name: document.querySelector("#form-name").value,
+            email: document.querySelector("#form-email").value,
+            phone: document.querySelector("#form-phone").value,
+            company: document.querySelector("#form-company").value,
+            service: document.querySelector("#form-service").value,
+        };
+
+        if (!validateFormSubmission(formData)) {
+            event.preventDefault();
+        }
+    });
+</script>
+
+{% block content %}
+<h1>Forms</h1>
+<table class="table table-bordered table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Company</th>
+            <th>Service</th>
+            <th>Message</th>
+            <th>Submitted At</th>
+            <th>Priority</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for form in forms %}
+        <tr>
+            <td>{{ form.name }}</td>
+            <td>{{ form.email }}</td>
+            <td>{{ form.phone }}</td>
+            <td>{{ form.company }}</td>
+            <td>{{ form.service }}</td>
+            <td>{{ form.message }}</td>
+            <td>{{ form.submitted_at }}</td>
+            <td>{{ form.priority }}</td>
+            <td>
+                <a href="{% url 'form_update_status' form.id %}" class="badge
+                    {% if form.status == 'Pending' %}bg-secondary
+                    {% elif form.status == 'Approved' %}bg-success
+                    {% elif form.status == 'Rejected' %}bg-danger
+                    {% else %}bg-secondary{% endif %}">
+                    {{ form.status }}
+                </a>
+            </td>
+            <td>
+                <a href="{% url 'form_delete' form.id %}" class="btn btn-danger btn-sm">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="10" class="text-center text-muted">No forms found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

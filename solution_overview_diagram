@@ -1,0 +1,23 @@
+// Automation Solution Overview
+digraph {
+	F [label="HTML Forms"]
+	E [label=Emails]
+	I [label=Invoices]
+	FP [label="Form Parser"]
+	EP [label="Email Parser"]
+	IP [label="Invoice Parser"]
+	V [label="Validation Engine"]
+	D [label="User Dashboard
+(Approve/Edit/Reject)"]
+	G [label="Google Sheets/Excel"]
+	L [label="Logs & Alerts"]
+	F -> FP
+	E -> EP
+	I -> IP
+	FP -> V
+	EP -> V
+	IP -> V
+	V -> D
+	D -> G [label=Approved]
+	D -> L [label=Logs]
+}
